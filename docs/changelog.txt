@@ -1,0 +1,6 @@
+Changelog for mspQiwi.
+
+mspQiwi 0.0.1
+==============
+- Initial release.
+- Synchronizing with qiwi in 2 steps : get information by Qiwi and check this information from request to Qiwi with Soap.
