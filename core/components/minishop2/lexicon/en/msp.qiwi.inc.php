@@ -1,8 +1,6 @@
 <?php
 
-
-
-$_lang['area_mspqiwi']="Qiwi";
+$_lang['area_mspqiwi'] = "Qiwi";
 
 $_lang['setting_ms2_mspqiwi_url'] = 'Service URL';
 $_lang['setting_ms2_mspqiwi_url_desc'] = 'Host address for Qiwi Visa Wallet service';
@@ -10,7 +8,6 @@ $_lang['setting_ms2_mspqiwi_url_desc'] = 'Host address for Qiwi Visa Wallet serv
 
 $_lang['setting_ms2_mspqiwi_shopId'] = 'ShopID:';
 $_lang['setting_ms2_mspqiwi_shopId_desc'] = 'ISHOPID Qiwi identificator';
-
 
 
 $_lang['setting_ms2_mspqiwi_shopKey'] = 'Key';
@@ -21,10 +18,8 @@ $_lang['setting_ms2_mspqiwi_lifetime'] = 'Bills lifetime';
 $_lang['setting_ms2_mspqiwi_lifetime_desc'] = 'Lifecycle of bills';
 
 
-
 $_lang['setting_ms2_mspqiwi_check_agt'] = 'Check agent';
 $_lang['setting_ms2_mspqiwi_check_agt_desc'] = 'Checks if users has a client of Qiwi';
-
 
 
 $_lang['setting_ms2_mspqiwi_statusPaid'] = 'Status';
@@ -47,6 +42,9 @@ $_lang['setting_ms2_mspqiwi_failureId_desc'] = 'ID for forward user after cancel
 
 $_lang['setting_ms2_mspqiwi_currency'] = 'Currency code';
 $_lang['setting_ms2_mspqiwi_currency_desc'] = 'Currency code for payment. Default=643 Russian Rouble';
+
+
+
 
 
 

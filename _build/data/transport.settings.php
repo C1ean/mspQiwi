@@ -4,11 +4,11 @@ $settings = array();
 
 
 $tmp = array(
-	'ms2_mspqiwi_url' => array(
-		'xtype' => 'textfield',
-		'value' => 'https://w.qiwi.ru/setInetBill_utf.do',
-		'area' => 'mspqiwi',
-	),
+    'ms2_mspqiwi_url' => array(
+        'xtype' => 'textfield',
+        'value' => 'https://w.qiwi.ru/setInetBill_utf.do',
+        'area' => 'mspqiwi',
+    ),
 
     'ms2_mspqiwi_shopId' => array(
         'xtype' => 'textfield',
@@ -71,20 +71,19 @@ $tmp = array(
     ),
 
 
-
 );
 
 foreach ($tmp as $k => $v) {
-	/* @var modSystemSetting $setting */
-	$setting = $modx->newObject('modSystemSetting');
-	$setting->fromArray(array_merge(
-		array(
-			'key' =>$k,
-			'namespace' => 'minishop2',
-		), $v
-	),'',true,true);
+    /* @var modSystemSetting $setting */
+    $setting = $modx->newObject('modSystemSetting');
+    $setting->fromArray(array_merge(
+        array(
+            'key' => $k,
+            'namespace' => 'minishop2',
+        ), $v
+    ), '', true, true);
 
-	$settings[] = $setting;
+    $settings[] = $setting;
 }
 
 unset($tmp);
