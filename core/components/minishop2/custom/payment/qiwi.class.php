@@ -85,7 +85,7 @@ class Qiwi extends msPaymentHandler implements msPaymentInterface
                 else { //variant when order already has been canceled (status 4=canceled)
                     $miniShop2->orderLog($order->get('id'), 'status', '');
 
-                    $this->modx->log(modX::LOG_LEVEL_ERROR, '[miniShop2] Field to change order status to Paid for txn:' . $order->get('id') . ' because order already is canceled in MS2.');
+                    $this->modx->log(modX::LOG_LEVEL_ERROR, '[miniShop2] Failed to change order status to Paid for txn:' . $order->get('id') . ' because order already is canceled in MS2.');
 
                 }
                 break;
@@ -208,7 +208,7 @@ class Server
                 } else {
                     //when amount count mismatch
                     $resp_code = -5;
-                    $modx->log(modX::LOG_LEVEL_ERROR, '[miniShop2] Payment field, txn:' . $param->txn . '$param->status:' . $param->status . ' rc->satus:' . $rc->status . ' order->cost:' . $order->get('cost') . ' $rc->amount:' . $rc->amount . ' fraud matching failed!');
+                    $modx->log(modX::LOG_LEVEL_ERROR, '[miniShop2] Payment failed, txn:' . $param->txn . '$param->status:' . $param->status . ' rc->satus:' . $rc->status . ' order->cost:' . $order->get('cost') . ' $rc->amount:' . $rc->amount . ' fraud matching failed!');
                 }
 
             } else {
@@ -223,7 +223,7 @@ class Server
         //logic end
 
         if ($resp_code != 0)
-            $modx->log(modX::LOG_LEVEL_ERROR, '[miniShop2] Field payment ' . $param->txt . ' Local resp_code: ' . $resp_code . ' Server status:' . $rc->status);
+            $modx->log(modX::LOG_LEVEL_ERROR, '[miniShop2] Failed payment ' . $param->txt . ' Local resp_code: ' . $resp_code . ' Server status:' . $rc->status);
 
 
         $to_srv_responce = new Response();
