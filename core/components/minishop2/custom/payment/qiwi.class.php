@@ -110,13 +110,13 @@ class Qiwi extends msPaymentHandler implements msPaymentInterface
     public function  request()
     {
 
-        $properties = array('classmap' => array('tns:updateBill' => 'Param', 'tns:updateBillResponse' => 'Response'));
+        $properties = array('classmap' => array('tns:updateBill' => 'qiwiParam', 'tns:updateBillResponse' => 'qiwiResponse'));
 
         $wsdl = MODX_CORE_PATH . 'components/minishop2/custom/payment/lib/qiwi/IShopClientWS.wsdl';
 
         $Soap = new SoapServer($wsdl, $properties);
 
-        $Soap->setClass('Server', $this->config['shopId'], $this->config['shopKey'], $this->config['statusPaid']);
+        $Soap->setClass('qiwiServer', $this->config['shopId'], $this->config['shopKey'], $this->config['statusPaid']);
         $Soap->handle();
 
         return true;
@@ -128,7 +128,7 @@ class Qiwi extends msPaymentHandler implements msPaymentInterface
 
 
 /*-------------------------------------*/
-class Server
+class qiwiServer
 {
     public $login = null;
     public $password = null;
@@ -260,12 +260,12 @@ class Server
 
 }
 
-class Response
+class qiwiResponse
 {
     public $updateBillResult;
 }
 
-class Param
+class qiwiParam
 {
     public $login;
     public $password;
