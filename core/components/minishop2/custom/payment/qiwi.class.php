@@ -78,8 +78,10 @@ class Qiwi extends msPaymentHandler implements msPaymentInterface
 
         switch ($params['status']) {
             case '60': //successfull payd. Update MS2 order status to Paid
-                if ($order->get('status') != 4)
+                if ($order->get('status') != 4) {
+                    @$this->modx->context->key = 'mgr';
                     $miniShop2->changeOrderStatus($order->get('id'), $this->config['statusPaid']);
+                }
                 else { //variant when order already has been canceled (status 4=canceled)
                     $miniShop2->orderLog($order->get('id'), 'status', '');
 
