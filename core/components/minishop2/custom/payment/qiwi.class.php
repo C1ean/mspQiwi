@@ -41,26 +41,32 @@ class Qiwi extends msPaymentHandler implements msPaymentInterface
             return $this->error('ms2_err_status_wrong');
         }
 
-        $address_data = $order->getOne('Address')->toArray('address.'); //get address information
-
-        $request = array( //get array for requery query
-            'from' => $this->config['shopId']
-        , 'to' => $address_data["address.phone"]
-        , 'summ' => $order->get('cost')
-        , 'com' => $this->config['comment']
-        , 'lifetime' => $this->config['lifetime']
-        , 'check_agt' => $this->config['check_agt']
-        , 'txn_id' => $order->get('id')
-        , 'currency' => $this->config['currency']
-        , 'successUrl' => $this->config['paymentUrl'] . '?action=success'
-        , 'failUrl' => $this->config['paymentUrl'] . '?action=failure'
-
-        );
-
-        $http_query = $this->config['checkoutUrl'] . '?' . http_build_query($request); //generate forward link
-
+        $http_query = $this->getPaymentLink($order);
         return $this->success('', array('redirect' => $http_query)); //return forward link
 
+    }
+    
+    
+    /* @inheritdoc} */
+    public function getPaymentLink(msOrder $order)
+    {
+			$address = $order->getOne('Address');
+            $id = $order->get('id');
+            $sum = number_format($order->get('cost'), 2, '.', '');
+            $request = array( //get array for requery query
+        		'from' => $this->config['shopId']
+    			, 'to' => $address->get('phone')
+    			, 'summ' => $order->get('cost')
+    			, 'com' => $this->config['comment']
+    			, 'lifetime' => $this->config['lifetime']
+    			, 'check_agt' => $this->config['check_agt']
+    			, 'txn_id' => $order->get('id')
+    			, 'currency' => $this->config['currency']
+    			//, 'successUrl' => $this->config['paymentUrl'] . '?action=success'
+    			//, 'failUrl' => $this->config['paymentUrl'] . '?action=failure'
+    		);
+            $link = $this->config['checkoutUrl'] .'?'. http_build_query($request);
+            return $link;
     }
 
 
