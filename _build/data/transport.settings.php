@@ -6,7 +6,7 @@ $settings = array();
 $tmp = array(
     'url' => array(
         'xtype' => 'textfield',
-        'value' => 'https://w.qiwi.ru/setInetBill_utf.do',
+        'value' => 'https://w.qiwi.com/order/external/create.action',
     ),
 
     'shopId' => array(
@@ -29,15 +29,6 @@ $tmp = array(
         'value' => 'false',
     ),
 
-    'statusPaid' => array(
-        'xtype' => 'numberfield',
-        'value' => '2',
-    ),
-
-    'statusCancel' => array(
-        'xtype' => 'numberfield',
-        'value' => '4',
-    ),
 
     'comment' => array(
         'xtype' => 'textfield',

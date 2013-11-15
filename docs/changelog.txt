@@ -1,5 +1,12 @@
 Changelog for mspQiwi.
 
+1.1.0 pl
+==============
+- Deleted payment status from config.Use defaults MS2 status (2,4) for success/cancel payment.
+- Added getPaymentLink for save payment if user closed paayment page
+- Fix small bugs and log outputs.
+
+
 1.0.0 rc
 ==============
 - Fix some errors

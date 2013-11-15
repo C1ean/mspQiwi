@@ -16,13 +16,11 @@ class Qiwi extends msPaymentHandler implements msPaymentInterface
 
         $this->config = array_merge(array(
             'paymentUrl' => $paymentUrl
-        , 'checkoutUrl' => $this->modx->getOption('ms2_mspqiwi_url', null, 'https://w.qiwi.ru/setInetBill_utf.do') //url
+        , 'checkoutUrl' => $this->modx->getOption('ms2_mspqiwi_url', null, 'https://w.qiwi.com/order/external/create.action') //url
         , 'shopId' => $this->modx->getOption('ms2_mspqiwi_shopId', null, '') //shopId
         , 'shopKey' => $this->modx->getOption('ms2_mspqiwi_shopKey', null, '') //shopKey
         , 'lifetime' => $this->modx->getOption('ms2_mspqiwi_lifetime', null, '24') //life cycle
         , 'check_agt' => $this->modx->getOption('ms2_mspqiwi_check_agt', null, 'false') //check agt
-        , 'statusPaid' => $this->modx->getOption('ms2_mspqiwi_statusPaid', null, '2') //success MS2 status
-        , 'statusCancel' => $this->modx->getOption('ms2_mspqiwi_statusCancel', null, '4') //cancel MS2 status
         , 'comment' => $this->modx->getOption('ms2_mspqiwi_comment', null, 'New Order ') //comment for qiwi payment on bill
         , 'successId' => $this->modx->getOption('ms2_mspqiwi_successId', null, '') //redirect to id when success payment
         , 'failureId' => $this->modx->getOption('ms2_mspqiwi_failureId', null, '') //redirect to id when failure payment
@@ -51,8 +49,7 @@ class Qiwi extends msPaymentHandler implements msPaymentInterface
     public function getPaymentLink(msOrder $order)
     {
 			$address = $order->getOne('Address');
-            $id = $order->get('id');
-            $sum = number_format($order->get('cost'), 2, '.', '');
+
             $request = array( //get array for requery query
         		'from' => $this->config['shopId']
     			, 'to' => $address->get('phone')
@@ -62,8 +59,8 @@ class Qiwi extends msPaymentHandler implements msPaymentInterface
     			, 'check_agt' => $this->config['check_agt']
     			, 'txn_id' => $order->get('id')
     			, 'currency' => $this->config['currency']
-    			//, 'successUrl' => $this->config['paymentUrl'] . '?action=success'
-    			//, 'failUrl' => $this->config['paymentUrl'] . '?action=failure'
+    			, 'successUrl' => $this->config['paymentUrl'] . '?action=success'
+    		    , 'failUrl' => $this->config['paymentUrl'] . '?action=failure'
     		);
             $link = $this->config['checkoutUrl'] .'?'. http_build_query($request);
             return $link;
@@ -80,7 +77,7 @@ class Qiwi extends msPaymentHandler implements msPaymentInterface
             case '60': //successfull payd. Update MS2 order status to Paid
                 if ($order->get('status') != 4) {
                     @$this->modx->context->key = 'mgr';
-                    $miniShop2->changeOrderStatus($order->get('id'), $this->config['statusPaid']);
+                    $miniShop2->changeOrderStatus($order->get('id'), 2);
                 }
                 else { //variant when order already has been canceled (status 4=canceled)
                     $miniShop2->orderLog($order->get('id'), 'status', '');
@@ -91,7 +88,7 @@ class Qiwi extends msPaymentHandler implements msPaymentInterface
                 break;
 
             case '100': //cancel order
-                $miniShop2->changeOrderStatus($order->get('id'), $this->config['statusCancel']);
+                $miniShop2->changeOrderStatus($order->get('id'), 4);
                 break;
 
         }
@@ -225,8 +222,8 @@ class qiwiServer
         if ($resp_code != 0)
             $modx->log(modX::LOG_LEVEL_ERROR, '[miniShop2] Failed payment ' . $param->txt . ' Local resp_code: ' . $resp_code . ' Server status:' . $rc->status);
 
-
-        $to_srv_responce = new Response();
+        /** @var qiwiResponse $to_srv_responce */
+        $to_srv_responce = new qiwiResponse();
         $to_srv_responce->updateBillResult = 0; //send 0 (we process payment) to Qiwi permanently
         return $to_srv_responce;
     }

@@ -22,14 +22,6 @@ $_lang['setting_ms2_mspqiwi_check_agt'] = 'Check agent';
 $_lang['setting_ms2_mspqiwi_check_agt_desc'] = 'Checks if users has a client of Qiwi';
 
 
-$_lang['setting_ms2_mspqiwi_statusPaid'] = 'Status';
-$_lang['setting_ms2_mspqiwi_statusPaid_desc'] = 'Qiwi status for success payment for MS2';
-
-
-$_lang['setting_ms2_mspqiwi_statusCancel'] = 'Cancel status';
-$_lang['setting_ms2_mspqiwi_statusCancel_desc'] = 'Qiwi status for canceled payment for MS2';
-
-
 $_lang['setting_ms2_mspqiwi_comment'] = 'Qiwi comment';
 $_lang['setting_ms2_mspqiwi_comment_desc'] = 'Comment for qiwi billing';
 

@@ -22,14 +22,6 @@ $_lang['setting_ms2_mspqiwi_check_agt'] = 'Проверять агента Qiwi'
 $_lang['setting_ms2_mspqiwi_check_agt_desc'] = 'Проверяет есть ли указанный клиент в киви банке.';
 
 
-$_lang['setting_ms2_mspqiwi_statusPaid'] = 'Статус оплаченого заказа';
-$_lang['setting_ms2_mspqiwi_statusPaid_desc'] = 'Выставится при успешной оплате через Qiwi в MS2->Заказы';
-
-
-$_lang['setting_ms2_mspqiwi_statusCancel'] = 'Статус отмененного заказа';
-$_lang['setting_ms2_mspqiwi_statusCancel_desc'] = 'Выставится при отмене счета Qiwi в MS2->Заказы';
-
-
 $_lang['setting_ms2_mspqiwi_comment'] = 'Комментарий';
 $_lang['setting_ms2_mspqiwi_comment_desc'] = 'Комментарий для платежа в Qiwi.Цепляется к выставленному счету внутри Qiwi';
 
